@@ -26,3 +26,10 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+Route::group(['prefix' => 'developer'], function () {
+    Route::get('login', [App\Http\Controllers\Developer\DeveloperController::class, 'loginPage' ]);
+    Route::post('login', [App\Http\Controllers\Developer\DeveloperController::class, 'login'])->name('developer.login');
+    Route::get('dashboard', [App\Http\Controllers\Developer\DeveloperController::class, 'dashboard'])->name('developer.dashboard')->middleware('developer');
+});
